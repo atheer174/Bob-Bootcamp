@@ -1,0 +1,53 @@
+{
+  "tools": {
+    "jira": {
+      "enabled": true,
+      "baseUrl": "https://your-company.atlassian.net",
+      "apiVersion": "3",
+      "defaultProject": "PROJ"
+    },
+    "database": {
+      "enabled": true,
+      "connections": {
+        "production": {
+          "host": "prod-db.example.com",
+          "port": 5432,
+          "database": "production",
+          "readOnly": true
+        },
+        "staging": {
+          "host": "staging-db.example.com",
+          "port": 5432,
+          "database": "staging",
+          "readOnly": true
+        },
+        "development": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "development",
+          "readOnly": false
+        }
+      }
+    },
+    "deployment": {
+      "enabled": true,
+      "platforms": ["kubernetes", "docker"],
+      "environments": ["development", "staging", "production"],
+      "requireApproval": {
+        "production": true,
+        "staging": false,
+        "development": false
+      }
+    }
+  },
+  "resources": {
+    "documentation": {
+      "enabled": true,
+      "sources": ["confluence", "github-wiki", "local-docs"]
+    },
+    "metrics": {
+      "enabled": true,
+      "providers": ["prometheus", "cloudwatch", "datadog"]
+    }
+  }
+}

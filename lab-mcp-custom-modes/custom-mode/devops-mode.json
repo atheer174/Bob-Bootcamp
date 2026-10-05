@@ -1,0 +1,115 @@
+{
+  "name": "DevOps Mode",
+  "slug": "devops",
+  "description": "Specialized mode for DevOps workflows including deployment, monitoring, and incident response",
+  "version": "1.0.0",
+  "icon": "🚀",
+  "capabilities": [
+    "deployment",
+    "monitoring",
+    "incident-response",
+    "infrastructure-management",
+    "log-analysis"
+  ],
+  "mcpServers": [
+    {
+      "name": "custom-mcp-server",
+      "command": "node",
+      "args": ["server.js"],
+      "cwd": "./lab6/mcp-server",
+      "env": {
+        "LOG_LEVEL": "info"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "name": "deploy_application",
+      "enabled": true,
+      "requiresApproval": true,
+      "approvalMessage": "This will deploy to {environment}. Proceed?"
+    },
+    {
+      "name": "rollback_deployment",
+      "enabled": true,
+      "requiresApproval": true,
+      "approvalMessage": "This will rollback deployment {deploymentId}. Proceed?"
+    },
+    {
+      "name": "check_deployment_status",
+      "enabled": true,
+      "requiresApproval": false
+    },
+    {
+      "name": "query_database",
+      "enabled": true,
+      "requiresApproval": false,
+      "restrictions": {
+        "readOnly": true,
+        "maxResults": 1000
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "name": "deployment_checklist",
+      "description": "Pre-deployment checklist",
+      "template": "Before deploying {application} to {environment}, verify:\n\n1. All tests passing\n2. Code reviewed and approved\n3. Database migrations ready\n4. Rollback plan documented\n5. Monitoring alerts configured\n6. Stakeholders notified\n\nProceed with deployment?"
+    },
+    {
+      "name": "incident_response",
+      "description": "Incident response runbook",
+      "template": "Incident Response for {service}:\n\n1. Assess Impact\n   - Check service health\n   - Review error rates\n   - Identify affected users\n\n2. Immediate Actions\n   - Scale resources if needed\n   - Enable circuit breakers\n   - Notify stakeholders\n\n3. Investigation\n   - Check recent deployments\n   - Review logs\n   - Analyze metrics\n\n4. Resolution\n   - Apply fix or rollback\n   - Verify resolution\n   - Update status page\n\n5. Post-Mortem\n   - Document timeline\n   - Identify root cause\n   - Create action items"
+    },
+    {
+      "name": "post_mortem",
+      "description": "Post-mortem template",
+      "template": "# Post-Mortem: {incident_title}\n\n## Summary\n{brief_summary}\n\n## Timeline\n- **Detection**: {detection_time}\n- **Response**: {response_time}\n- **Resolution**: {resolution_time}\n- **Duration**: {total_duration}\n\n## Impact\n- **Users Affected**: {user_count}\n- **Services Affected**: {services}\n- **Revenue Impact**: {revenue_impact}\n\n## Root Cause\n{root_cause_analysis}\n\n## Resolution\n{resolution_steps}\n\n## Action Items\n1. {action_item_1}\n2. {action_item_2}\n3. {action_item_3}\n\n## Lessons Learned\n{lessons_learned}"
+    }
+  ],
+  "systemPrompt": "You are a DevOps expert assistant. Help with deployments, monitoring, incident response, and infrastructure management. Always prioritize safety and follow best practices. For production deployments, always verify prerequisites and require explicit approval.",
+  "settings": {
+    "autoApprove": false,
+    "verboseLogging": true,
+    "maxConcurrentOperations": 3,
+    "defaultEnvironment": "staging",
+    "safetyChecks": {
+      "productionDeployment": true,
+      "databaseOperations": true,
+      "infrastructureChanges": true
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "Deploy to Staging",
+      "command": "Deploy {application} version {version} to staging environment",
+      "requiresInput": ["application", "version"]
+    },
+    {
+      "name": "Check Service Health",
+      "command": "Check the health status of {service}",
+      "requiresInput": ["service"]
+    },
+    {
+      "name": "View Recent Deployments",
+      "command": "Show me the last 10 deployments for {application}",
+      "requiresInput": ["application"]
+    }
+  ],
+  "documentation": {
+    "gettingStarted": "This mode provides tools for DevOps workflows. Use it for deployments, monitoring, and incident response.",
+    "examples": [
+      "Deploy myapp version 2.1.0 to staging",
+      "Check deployment status for deployment-12345",
+      "Rollback deployment-12345 due to high error rate",
+      "Show me the deployment checklist for production"
+    ],
+    "bestPractices": [
+      "Always test in staging before production",
+      "Have a rollback plan ready",
+      "Monitor deployments closely",
+      "Document all changes",
+      "Communicate with stakeholders"
+    ]
+  }
+}

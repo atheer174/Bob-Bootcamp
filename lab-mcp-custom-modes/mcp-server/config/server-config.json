@@ -1,0 +1,23 @@
+{
+  "name": "custom-mcp-server",
+  "version": "1.0.0",
+  "description": "Custom MCP Server for Lab 6",
+  "server": {
+    "host": "localhost",
+    "port": 3000,
+    "protocol": "stdio"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": true
+  },
+  "logging": {
+    "level": "info",
+    "file": "logs/mcp-server.log"
+  },
+  "security": {
+    "requireAuth": false,
+    "allowedOrigins": ["*"]
+  }
+}
