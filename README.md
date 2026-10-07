@@ -1,6 +1,5 @@
 # 🚀 Bob Bootcamp
 
-![Riyadh Air](bob-bootcamp/Client-case-Riyadh-Air-Website.png)
 
 Welcome to the **Bob Bootcamp** - a growing collection of hands-on labs for IBM Bob. Each lab is self-contained and built around a real-world task, so you can start anywhere that matches your current goal.
 
